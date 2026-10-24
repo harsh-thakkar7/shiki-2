@@ -1,6 +1,7 @@
 import type { MarkdownIt } from 'markdown-it'
 import type {
   CodeToHastOptions,
+  HighlighterCore,
   HighlighterGeneric,
   ShikiTransformer,
 } from 'shiki'
@@ -10,7 +11,7 @@ export type { MarkdownItShikiExtraOptions, MarkdownItShikiSetupOptions } from '.
 
 export function setupMarkdownIt(
   markdownit: MarkdownIt,
-  highlighter: HighlighterGeneric<any, any>,
+  highlighter: HighlighterCore | HighlighterGeneric<any, any>,
   options: MarkdownItShikiSetupOptions,
 ): void {
   const {
@@ -66,7 +67,7 @@ export function setupMarkdownIt(
 }
 
 export function fromHighlighter(
-  highlighter: HighlighterGeneric<any, any>,
+  highlighter: HighlighterCore | HighlighterGeneric<any, any>,
   options: MarkdownItShikiSetupOptions,
 ) {
   return function (markdownit: MarkdownIt) {

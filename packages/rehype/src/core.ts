@@ -1,5 +1,6 @@
 import type {
   CodeToHastOptions,
+  HighlighterCore,
   HighlighterGeneric,
 } from '@shikijs/types'
 import type { Root } from 'hast'
@@ -15,7 +16,7 @@ export * from './types'
 const languagePrefix = 'language-'
 
 function rehypeShikiFromHighlighter(
-  highlighter: HighlighterGeneric<any, any>,
+  highlighter: HighlighterCore | HighlighterGeneric<any, any>,
   options: RehypeShikiCoreOptions,
 ): Transformer<Root, Root> {
   const {
@@ -150,7 +151,7 @@ function rehypeShikiFromHighlighter(
         try {
           // passed language is checked in sync, promise `.catch()` wouldn't work
           queue.push(
-            highlighter.loadLanguage(lang)
+            (highlighter as HighlighterGeneric<any, any>).loadLanguage(lang)
               .then(() => processNode(lang))
               .catch((error) => {
                 if (fallbackLanguage) {

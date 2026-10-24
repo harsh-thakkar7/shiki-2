@@ -1,6 +1,7 @@
 import type { MarkdownExit } from 'markdown-exit'
 import type {
   CodeToHastOptions,
+  HighlighterCore,
   HighlighterGeneric,
   ShikiTransformer,
 } from 'shiki'
@@ -10,7 +11,7 @@ export type { MarkdownExitShikiExtraOptions, MarkdownExitShikiSetupOptions } fro
 
 export function setupMarkdownExit(
   md: MarkdownExit,
-  highlighter: HighlighterGeneric<any, any>,
+  highlighter: HighlighterCore | HighlighterGeneric<any, any>,
   options: MarkdownExitShikiSetupOptions,
 ): void {
   const {
@@ -66,7 +67,7 @@ export function setupMarkdownExit(
 }
 
 export function fromHighlighter(
-  highlighter: HighlighterGeneric<any, any>,
+  highlighter: HighlighterCore | HighlighterGeneric<any, any>,
   options: MarkdownExitShikiSetupOptions,
 ) {
   return function (md: MarkdownExit) {
